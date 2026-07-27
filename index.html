@@ -1,679 +1,121 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>POCOCO Creator Guide | Sleep &amp; Recovery</title>
-  <style>
-    :root {
-      --deep: #040716;
-      --night: #07173a;
-      --panel: rgba(255, 255, 255, .075);
-      --panel-strong: rgba(255, 255, 255, .12);
-      --line: rgba(174, 194, 255, .2);
-      --text: #f8fbff;
-      --muted: #bfd0f5;
-      --soft: #86a8ff;
-      --cyan: #71d9ff;
-      --gold: #ffd76f;
-      --gold-soft: rgba(255, 215, 111, .14);
-      --shadow: rgba(0, 10, 36, .38);
-    }
-    * { box-sizing: border-box; }
-    html { background: var(--deep); scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Inter, "SF Pro Display", "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 82% 10%, rgba(113, 217, 255, .18), transparent 28%),
-        radial-gradient(circle at 16% 34%, rgba(134, 168, 255, .18), transparent 32%),
-        linear-gradient(180deg, #050716 0%, #091b45 48%, #123b6d 100%);
-    }
-    a { color: inherit; }
-    .page {
-      width: min(100%, 1440px);
-      margin: 0 auto;
-      padding: 34px clamp(22px, 4vw, 64px) 58px;
-    }
-    .brand {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 26px;
-      margin-bottom: 50px;
-    }
-    .logo {
-      font-size: 31px;
-      line-height: 1;
-      font-weight: 650;
-      letter-spacing: 0;
-      color: #fff;
-    }
-    .type-tabs {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(74px, 1fr));
-      gap: 8px;
-      width: min(860px, 100%);
-    }
-    .type-tabs a {
-      display: grid;
-      gap: 7px;
-      min-height: 76px;
-      padding: 10px 8px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: rgba(240, 246, 255, .78);
-      text-decoration: none;
-      background: rgba(255, 255, 255, .055);
-      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-    }
-    .type-tabs a:hover,
-    .type-tabs a:focus-visible {
-      transform: translateY(-2px);
-      border-color: rgba(255, 215, 111, .5);
-      background: rgba(255, 255, 255, .09);
-      outline: none;
-    }
-    .type-tabs a[aria-current="page"] {
-      color: #071238;
-      background: linear-gradient(135deg, #fff4c8, var(--gold));
-      border-color: transparent;
-    }
-    .type-tabs span {
-      width: 30px;
-      height: 30px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      color: #06123a;
-      background: #dfeaff;
-      font-size: 12px;
-      font-weight: 850;
-    }
-    .type-tabs b {
-      font-size: 11px;
-      line-height: 1.16;
-      font-weight: 750;
-      letter-spacing: 0;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
-      gap: clamp(28px, 6vw, 84px);
-      align-items: end;
-      margin-bottom: 56px;
-    }
-    .hero h1 {
-      max-width: 800px;
-      margin: 0;
-      font-size: clamp(48px, 7.2vw, 104px);
-      line-height: .92;
-      letter-spacing: 0;
-      font-weight: 780;
-    }
-    .tagline {
-      max-width: 760px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: clamp(19px, 2vw, 28px);
-      line-height: 1.28;
-      font-weight: 650;
-    }
-    .hero-note {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255,255,255,.07);
-      box-shadow: 0 20px 60px var(--shadow);
-    }
-    .hero-note span,
-    .section-kicker,
-    .message span {
-      color: var(--gold);
-      font-weight: 850;
-    }
-    .hero-note p {
-      margin: 10px 0 0;
-      color: #eaf2ff;
-      font-size: 16px;
-      line-height: 1.55;
-      font-weight: 620;
-    }
-    .section { margin-top: 58px; }
-    .section-head {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 16px 18px;
-      align-items: start;
-      margin-bottom: 24px;
-    }
-    .number {
-      display: inline-grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      background: var(--gold);
-      color: #071238;
-      font-weight: 880;
-      font-size: 18px;
-    }
-    h2 {
-      margin: 0;
-      font-size: clamp(30px, 4vw, 54px);
-      line-height: 1;
-      letter-spacing: 0;
-      font-weight: 800;
-    }
-    .section-note {
-      max-width: 860px;
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.52;
-      font-weight: 600;
-    }
-    .flow-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .flow-card,
-    .theory-card,
-    .message,
-    .idea-panel,
-    .reel-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      box-shadow: 0 18px 50px var(--shadow);
-    }
-    .flow-card {
-      min-height: 258px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .flow-card.emphasis {
-      background: linear-gradient(180deg, var(--gold-soft), rgba(255,255,255,.075));
-      border-color: rgba(255, 215, 111, .38);
-    }
-    .flow-index {
-      color: rgba(255,255,255,.4);
-      font-size: 13px;
-      font-weight: 850;
-      margin-bottom: 32px;
-    }
-    .flow-card h3,
-    .theory-card h3,
-    .idea-panel h3,
-    .video-title {
-      margin: 0;
-      font-size: 21px;
-      line-height: 1.14;
-      letter-spacing: 0;
-      font-weight: 830;
-    }
-    .flow-card p,
-    .theory-card p,
-    .message p,
-    .idea-panel p,
-    .idea-panel li {
-      margin: 12px 0 0;
-      color: #edf4ff;
-      font-size: 15.5px;
-      line-height: 1.52;
-      font-weight: 600;
-    }
-    .proof-band {
-      margin-top: 14px;
-      padding: 18px 20px;
-      border: 1px solid rgba(255, 215, 111, .32);
-      border-radius: 8px;
-      background: rgba(255, 215, 111, .1);
-      color: #fff5d5;
-      font-size: 17px;
-      line-height: 1.5;
-      font-weight: 720;
-    }
-    .message-layout {
-      display: grid;
-      grid-template-columns: minmax(320px, .86fr) minmax(0, 1.14fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-    .theory-stack {
-      display: grid;
-      gap: 12px;
-    }
-    .theory-card {
-      display: grid;
-      grid-template-columns: 58px minmax(0, 1fr);
-      gap: 14px;
-      padding: 18px;
-    }
-    .theory-key {
-      width: 54px;
-      height: 54px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      color: #071238;
-      background: var(--gold);
-      font-size: 15px;
-      font-weight: 900;
-    }
-    .theory-card h3 {
-      font-size: 17px;
-    }
-    .theory-card p {
-      margin-top: 7px;
-      font-size: 14.5px;
-      color: #dfeaff;
-    }
-    .message-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .message {
-      min-height: 148px;
-      padding: 18px;
-    }
-    .message span {
-      display: block;
-      font-size: 15px;
-      line-height: 1.1;
-    }
-    .idea-panel {
-      margin-top: 18px;
-      padding: 22px;
-      display: grid;
-      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-      gap: 22px;
-      align-items: start;
-      background: rgba(255, 255, 255, .06);
-    }
-    .idea-panel ul {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px 16px;
-      margin: 0;
-      padding-left: 18px;
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      align-items: start;
-    }
-    .reel-card {
-      display: grid;
-      grid-template-columns: minmax(190px, 240px) minmax(0, 1fr);
-      gap: 18px;
-      align-items: stretch;
-      overflow: hidden;
-      padding: 14px;
-    }
-    .reel-frame {
-      position: relative;
-      aspect-ratio: 9 / 16;
-      overflow: hidden;
-      border-radius: 8px;
-      background: #071f38;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
-    }
-    .reel-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    .reel-copy {
-      display: flex;
-      min-height: 100%;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 5px 2px 4px 0;
-    }
-    .video-focus {
-      margin: 8px 0 0;
-      color: #e5f1ff;
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 750;
-    }
-    .video-note {
-      margin: 0;
-      color: #c8defd;
-      font-size: 14px;
-      line-height: 1.48;
-    }
-    .watch {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #fff2bd;
-      font-size: 14px;
-      font-weight: 800;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-    .watch svg { width: 15px; height: 15px; }
-    .footer-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      margin: 42px auto 0;
-      width: min(100%, 1080px);
-      min-height: 50px;
-      padding: 12px 24px;
-      border: 1px solid rgba(255, 215, 111, .26);
-      border-radius: 8px;
-      color: #fff4c8;
-      background: rgba(255, 215, 111, .08);
-      font-size: 16px;
-      font-weight: 760;
-      text-align: center;
-    }
-    .footer-line span { color: rgba(232, 243, 255, .38); }
-    @media (max-width: 1120px) {
-      .brand,
-      .hero,
-      .message-layout,
-      .idea-panel {
-        grid-template-columns: 1fr;
-      }
-      .type-tabs {
-        grid-template-columns: repeat(4, minmax(74px, 1fr));
-        width: 100%;
-      }
-      .flow-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 760px) {
-      .page { padding: 28px 18px 44px; }
-      .type-tabs,
-      .flow-grid,
-      .message-grid,
-      .idea-panel ul,
-      .video-grid {
-        grid-template-columns: 1fr;
-      }
-      .type-tabs a {
-        min-height: 54px;
-        grid-template-columns: 32px minmax(0, 1fr);
-        align-items: center;
-      }
-      .hero { gap: 20px; }
-      .flow-card { min-height: auto; }
-      .reel-card { grid-template-columns: minmax(0, 1fr); }
-      .reel-frame { width: min(100%, 300px); margin: 0 auto; }
-      .footer-line {
-        flex-direction: column;
-        gap: 8px;
-      }
-      .footer-line span { display: none; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050817">
+  <meta name="description" content="POCOCO creator direction and continuously updated content references for Sleep & Recovery.">
+  <title>POCOCO Creator Direction · Sleep & Recovery</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="stylesheet" href="./assets/overrides.css">
+  <link rel="stylesheet" href="./assets/v4.css">
+  <link rel="stylesheet" href="./assets/v5.css">
+  <link rel="stylesheet" href="./assets/v6.css">
 </head>
-<body>
-  <main class="page">
-    <header class="brand" aria-label="POCOCO creator guide">
-      <div class="logo">pococo</div>
-      <nav class="type-tabs" aria-label="Creator type pages">
-        <a href="../parenting-family/"><span>PA</span><b>Parenting &amp; Family</b></a>
-<a href="../sleep-recovery/" aria-current="page"><span>SL</span><b>Sleep &amp; Recovery</b></a>
-<a href="../neurodivergent-support/"><span>NE</span><b>Neurodivergent Support</b></a>
-<a href="../mental-wellness/"><span>ME</span><b>Mental Wellness &amp; Emotional Health</b></a>
-<a href="../wellness-healthy-living/"><span>WE</span><b>Wellness &amp; Healthy Living</b></a>
-<a href="../personal-growth-womens-lifestyle/"><span>PG</span><b>Personal Growth &amp; Women's Lifestyle</b></a>
-<a href="../lifestyle-home-design/"><span>HO</span><b>Lifestyle, Home &amp; Design</b></a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div>
-        <div class="section-kicker">Creator Direction</div>
-        <h1>Sleep &amp; Recovery</h1>
-        <p class="tagline">Healthier bedtime habits. Softer evenings. Restful routines.</p>
-      </div>
-      <aside class="hero-note">
-        <span>Story first, product second.</span>
-        <p>Build from a real moment, show the before-and-after change, then let POCOCO appear as the atmosphere that helps the story make sense.</p>
-      </aside>
-    </section>
-
-    <section class="section" aria-labelledby="framework-title">
-      <div class="section-head">
-        <span class="number">01</span>
-        <div>
-          <h2 id="framework-title">Story Framework</h2>
-          <p class="section-note">Use this as a flexible logic path. Creators do not need to copy every word, but the story should have a clear emotional reason.</p>
-        </div>
-      </div>
-
-      <div class="flow-grid">
-        
-        <article class="flow-card ">
-          <div class="flow-index">01</div>
-          <h3>Real Moment</h3>
-          <p>Open with the moment when the day is technically over but the mind is still switched on: phone in hand, bright room, racing thoughts, or post-workout restlessness.</p>
-        </article>
-
-        <article class="flow-card emphasis">
-          <div class="flow-index">02</div>
-          <h3>Before</h3>
-          <p>Make the before-state about lifestyle and body rhythm, not a medical sleep claim: too much stimulation, no transition ritual, or a room that still feels like daytime.</p>
-        </article>
-
-        <article class="flow-card ">
-          <div class="flow-index">03</div>
-          <h3>POCOCO Scene</h3>
-          <p>Use the projection as a visual signal for the evening shift: lower lights, put the phone down, stretch, read, breathe, or sit quietly while the room changes.</p>
-        </article>
-
-        <article class="flow-card emphasis">
-          <div class="flow-index">04</div>
-          <h3>After</h3>
-          <p>Show a more consistent wind-down environment: slower pace, reduced screen pull, more intentional rest, and a bedroom that supports recovery.</p>
-        </article>
-
-        <article class="flow-card ">
-          <div class="flow-index">05</div>
-          <h3>Natural CTA</h3>
-          <p>Speak to people building better nighttime habits: if your evening routine needs a clearer off-switch, this can become part of that ritual.</p>
-        </article>
-      </div>
-      <div class="proof-band">Sleep and recovery creators should avoid treatment promises. The strongest angle is environmental design: what changes around you can help your routine feel more consistent.</div>
-    </section>
-
-    <section class="section" aria-labelledby="messages-title">
-      <div class="section-head">
-        <span class="number">02</span>
-        <div>
-          <h2 id="messages-title">Message Mention</h2>
-          <p class="section-note">Connect each product point to the transition from stimulation to recovery. Keep the tone practical, grounded, and habit-focused.</p>
-        </div>
-      </div>
-
-      <div class="message-layout">
-        <div class="theory-stack">
-          
-        <article class="theory-card">
-          <div class="theory-key">PRT</div>
-          <div>
-            <h3>Psychological Restoration Theory</h3>
-            <p>Use the projected universe as a restorative environment cue: a visual shift that can help the story move from pressure, noise, or emotional load into a calmer state.</p>
-          </div>
-        </article>
-
-        <article class="theory-card">
-          <div class="theory-key">ART</div>
-          <div>
-            <h3>Attention Restoration Theory</h3>
-            <p>Show soft fascination: visuals that hold attention gently without asking the audience to keep scrolling, reading, or working harder.</p>
-          </div>
-        </article>
-
-        <article class="theory-card">
-          <div class="theory-key">CRT</div>
-          <div>
-            <h3>Conditioned Restoration Theory</h3>
-            <p>Connect repeated rituals with the same calming atmosphere so the projection becomes a familiar cue for bedtime, reset, focus, or connection.</p>
-          </div>
-        </article>
-        </div>
-        <div class="message-grid">
-          
-        <article class="message">
-          <span>Screen-free cue</span>
-          <p>Show POCOCO as a reason to set the phone down and let the room carry the visual experience instead.</p>
-        </article>
-
-        <article class="message">
-          <span>Low-stimulation light</span>
-          <p>Soft indirect projection can support a calmer night environment without harsh glare.</p>
-        </article>
-
-        <article class="message">
-          <span>Repeatable ritual</span>
-          <p>Pair the same projection habit with reading, stretching, or breathwork so the room becomes a familiar wind-down cue.</p>
-        </article>
-
-        <article class="message">
-          <span>Quiet presence</span>
-          <p>Quiet operation matters because the product should disappear into the ritual rather than interrupt it.</p>
-        </article>
-
-        <article class="message">
-          <span>Full-room atmosphere</span>
-          <p>Capture at least one wide room shot so the audience can see the environmental change, not only the product.</p>
-        </article>
-
-        <article class="message">
-          <span>Careful claim</span>
-          <p>Do not say it treats insomnia or guarantees better sleep. Focus on routine, environment, and relaxation.</p>
-        </article>
-        </div>
-      </div>
-
-      <article class="idea-panel">
-        <div>
-          <span class="section-kicker">Creative starting points</span>
-          <h3>Scenes that can carry the story</h3>
-          <p>Pick the scenes that match your creator style and audience. The product should feel naturally connected to the moment.</p>
-        </div>
-        <ul>
-          <li>Digital detox before bed</li><li>Post-workout recovery evening</li><li>Reading under projection</li><li>Stretching or breathwork routine</li><li>Travel recovery or jet lag reset</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="section" aria-labelledby="visual-title">
-      <div class="section-head">
-        <span class="number">03</span>
-        <div>
-          <h2 id="visual-title">Content &amp; Visual Inspiration</h2>
-          <p class="section-note">These videos are visual presentation references only. Content-specific examples will be added later. Click a video frame to open the online reference.</p>
-        </div>
-      </div>
-
-      <div class="video-grid">
-        
-        <article class="reel-card">
-          <div class="reel-frame">
-            <iframe
-              src="https://www.instagram.com/reel/DMxIJEwMpY8/embed/"
-              title="Visual Reference 01"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="reel-copy">
-            <div>
-              <h3 class="video-title">Visual Reference 01</h3>
-              <p class="video-focus">Vertical framing, cover composition, pacing</p>
-            </div>
-            <p class="video-note">Use this as a visual presentation reference. Content examples will be added later.</p>
-            <a class="watch" href="https://www.instagram.com/reels/DMxIJEwMpY8/" target="_blank" rel="noreferrer">Open on Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/><path d="M5 12v7h7"/></svg></a>
-          </div>
-        </article>
-
-        <article class="reel-card">
-          <div class="reel-frame">
-            <iframe
-              src="https://www.instagram.com/reel/DOvtftejmco/embed/"
-              title="Visual Reference 02"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="reel-copy">
-            <div>
-              <h3 class="video-title">Visual Reference 02</h3>
-              <p class="video-focus">Shot rhythm, transitions, on-screen mood</p>
-            </div>
-            <p class="video-note">Use this as a visual presentation reference. Content examples will be added later.</p>
-            <a class="watch" href="https://www.instagram.com/reels/DOvtftejmco/" target="_blank" rel="noreferrer">Open on Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/><path d="M5 12v7h7"/></svg></a>
-          </div>
-        </article>
-
-        <article class="reel-card">
-          <div class="reel-frame">
-            <iframe
-              src="https://www.instagram.com/reel/DN6H6SVjqU2/embed/"
-              title="Visual Reference 03"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="reel-copy">
-            <div>
-              <h3 class="video-title">Visual Reference 03</h3>
-              <p class="video-focus">Scene setup, lighting, visual storytelling</p>
-            </div>
-            <p class="video-note">Use this as a visual presentation reference. Content examples will be added later.</p>
-            <a class="watch" href="https://www.instagram.com/reels/DN6H6SVjqU2/" target="_blank" rel="noreferrer">Open on Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/><path d="M5 12v7h7"/></svg></a>
-          </div>
-        </article>
-
-        <article class="reel-card">
-          <div class="reel-frame">
-            <iframe
-              src="https://www.instagram.com/reel/DQmOUdjCHwd/embed/"
-              title="Visual Reference 04"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="reel-copy">
-            <div>
-              <h3 class="video-title">Visual Reference 04</h3>
-              <p class="video-focus">Reel cover, vertical layout, product atmosphere</p>
-            </div>
-            <p class="video-note">Use this as a visual presentation reference. Content examples will be added later.</p>
-            <a class="watch" href="https://www.instagram.com/reels/DQmOUdjCHwd/" target="_blank" rel="noreferrer">Open on Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10"/><path d="M7 17 17 7"/><path d="M5 12v7h7"/></svg></a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="footer-line">
-      <strong>Build the ritual first. Let the product become the cue.</strong>
-      <span>|</span>
-      <strong>Keep the CTA natural, specific, and useful to this audience.</strong>
+<body data-guide="sleep-recovery">
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="../" aria-label="POCOCO creator directions home">pococo</a>
+      <nav class="type-nav" id="type-nav" aria-label="Creator direction pages"></nav>
     </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-inner">
+        <div>
+          <div class="eyebrow">Creator Direction</div>
+          <h1 id="guide-title">Sleep & Recovery</h1>
+          <p class="tagline" id="guide-tagline">Lower-interaction evenings. Clearer wind-down cues. More intentional rest.</p>
+        </div>
+        <aside class="hero-note">
+          <strong>Story first, product second.</strong>
+          <p>Start from a real moment, make the change visible, then let POCOCO become the atmosphere that helps the story make sense.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section white" id="angles">
+      <div class="shell">
+        <div class="section-head">
+          <span class="section-number">01</span>
+          <div>
+            <h2 class="section-title">Content angle references</h2>
+            <p class="section-note">Six starting points鈥攏ot a fixed list. Adapt, combine, or build a different direction that fits your real voice and audience.</p>
+          </div>
+        </div>
+        <div class="angle-grid" id="angle-grid"></div>
+      </div>
+    </section>
+
+    <section class="section deep" id="story">
+      <div class="shell">
+        <div class="section-head">
+          <span class="section-number">02</span>
+          <div>
+            <h2 class="section-title">Build the story</h2>
+            <p class="section-note">Use this as a flexible logic path. Keep the emotional reason clear and let product details appear through real actions.</p>
+          </div>
+        </div>
+        <div class="flow-grid" id="flow-grid"></div>
+        <div class="message-grid" id="message-grid"></div>
+        <div class="language-band">
+          <div class="language-item">
+            <span>Better to say</span>
+            <p id="better-language"></p>
+          </div>
+          <div class="language-item avoid">
+            <span>Please avoid</span>
+            <p id="avoid-language"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section lavender" id="content">
+      <div class="shell">
+        <div class="section-head">
+          <span class="section-number">03</span>
+          <div>
+            <h2 class="section-title">Content references</h2>
+            <p class="section-note">All currently relevant examples are included. Start with the featured cases, then expand the complete list when you need more directions.</p>
+          </div>
+          <span class="count-badge" id="content-count"></span>
+        </div>
+        <div class="case-grid" id="case-grid"></div>
+        <button class="load-more" id="load-more" type="button" aria-expanded="false"></button>
+      </div>
+    </section>
+
+    <section class="section deep" id="visuals">
+      <div class="shell">
+        <div class="section-head">
+          <span class="section-number">04</span>
+          <div>
+            <h2 class="section-title">Visual references</h2>
+            <p class="section-note">A fixed row of three visual references. Borrow the framing, lighting, room coverage, reaction, or pacing—not the creator’s exact script.</p>
+          </div>
+          <span class="count-badge">3 selected visuals</span>
+        </div>
+        <div class="visual-row" id="visual-row"></div>
+        <aside class="capture-note">
+          <strong>Required projection coverage</strong>
+          <p>Always capture black-and-white projection. If both black-and-white and color discs are supplied, film both. For each featured disc, include a full projection, a person in the scene, a natural activity, and a short product interaction.</p>
+        </aside>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <strong id="guide-footer">Build the ritual first. Let the product become the cue.</strong>
+      <span>Content references are centrally managed and can continue to grow.</span>
+    </div>
+  </footer>
+
+  <script src="./data/cases.js"></script>
+  <script src="./data/guides.js"></script>
+  <script src="./assets/app.js"></script>
+  <script src="./assets/visual-notes.js"></script>
 </body>
 </html>

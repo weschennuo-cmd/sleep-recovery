@@ -1,0 +1,39 @@
+/* V6: three content references per row on desktop, two on tablet, one on mobile. */
+@media (min-width: 1280px) {
+  .case-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .case-card {
+    grid-template-columns: minmax(0, 1fr) 158px;
+  }
+
+  .case-copy {
+    padding: 18px 17px 20px;
+  }
+
+  .case-card h3 {
+    font-size: 19px;
+  }
+
+  .case-topline {
+    gap: 8px;
+  }
+
+  .platform,
+  .watch-time {
+    font-size: 9px;
+  }
+
+  .direction {
+    font-size: 12px;
+  }
+
+  .case-block p {
+    font-size: 11px;
+  }
+
+  .case-media {
+    padding: 9px;
+  }
+}
