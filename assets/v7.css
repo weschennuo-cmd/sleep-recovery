@@ -1,0 +1,141 @@
+/* V7: larger embedded video areas for both content and visual references. */
+.case-media small {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .case-card {
+    min-height: 480px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .case-media {
+    height: 100%;
+    min-height: 480px;
+    padding: 10px;
+    display: grid;
+    grid-template-rows: minmax(0, 4fr) minmax(58px, 1fr);
+    align-items: stretch;
+  }
+
+  .media-poster,
+  .embed-shell {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+
+  .media-original {
+    min-height: 0;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 8px 4px 2px;
+    line-height: 1.25;
+  }
+}
+
+.visual-media {
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+}
+
+.visual-media::after {
+  pointer-events: none;
+}
+
+.visual-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  border: 0;
+  background: #09112d;
+  cursor: pointer;
+}
+
+.visual-poster img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+
+.visual-poster:hover img {
+  transform: scale(1.025);
+}
+
+.visual-play-mark {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .78);
+  border-radius: 50%;
+  background: rgba(9, 17, 45, .76);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .32);
+  transform: translate(-50%, -50%);
+}
+
+.visual-play-label {
+  position: absolute;
+  z-index: 3;
+  left: 18px;
+  right: 18px;
+  bottom: 20px;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: .08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.visual-embed-shell {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #fff;
+}
+
+.visual-embed-shell iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+@media (max-width: 760px) {
+  .case-card {
+    min-height: 0;
+  }
+
+  .case-media {
+    min-height: 0;
+  }
+
+  .media-poster,
+  .embed-shell {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .visual-media {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual-poster img {
+    transition: none;
+  }
+}
